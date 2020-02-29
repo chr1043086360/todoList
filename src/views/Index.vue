@@ -181,8 +181,14 @@ export default {
                 message: "用户未注册,请先注册",
                 type: "warning"
               });
-            }
-            if (this.tableData.data === 200) {
+            } else if (this.tableData.data === 40001) {
+              this.$message({
+                showClose: true,
+                duration: 1500,
+                message: "请输入正确的用户名或密码",
+                type: "warning"
+              });
+            } else {
               this.$message({
                 showClose: true,
                 duration: 1500,
@@ -190,13 +196,6 @@ export default {
                 type: "success"
               });
               this.status = !this.status;
-            } else {
-              this.$message({
-                showClose: true,
-                duration: 1500,
-                message: "登录失败",
-                type: "warning"
-              });
             }
           });
       }
