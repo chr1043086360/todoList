@@ -8,7 +8,7 @@
         <el-input v-model="newTitle" size placeholder="请输入待办事项..." />
       </el-col>
       <el-col :span="6">
-        <el-button type="primary" icon="el-icon-plus" @click="handleAdd" circle></el-button>
+        <el-button class="addButton" type="primary" icon="el-icon-plus" @click="handleAdd" circle></el-button>
       </el-col>
     </el-row>
     <el-divider></el-divider>
@@ -28,7 +28,6 @@
           ></el-button>
           <el-button
             type="warning"
-                      
             icon="el-icon-finished"
             v-show="scope.row.Status"
             @click="handleEdit(scope.$index, scope.row)"
@@ -130,6 +129,12 @@ export default {
 </script>
 
 <style>
+/* .addButton {
+  padding: 0 auto;
+} */
+/* .el-col el-col-6{
+  padding: 0 auto;
+} */
 .el-table .warning-row {
   background: oldlace;
 }
