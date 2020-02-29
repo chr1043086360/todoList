@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 <template>
   <el-container>
     <el-header>
@@ -11,7 +12,7 @@
       ></el-button>
       <div class="myPlans">My Plans</div>
     </el-header>
-
+    <!-- {{tableData}} -->
     <!-- <el-button class="myHome_btn" type="primary" icon="el-icon-edit" circle></el-button> -->
 
     <el-form
@@ -22,10 +23,10 @@
       ref="loginForm"
       class="demo-ruleForm"
     >
-      <el-form-item prop="userName">
+      <el-form-item prop="username">
         <el-input
           type="text"
-          v-model="loginForm.userName"
+          v-model="loginForm.username"
           autocomplete="off"
           placeholder="Username"
           class="fuck"
@@ -40,7 +41,10 @@
         ></el-input>
       </el-form-item>
       <el-form-item class="btn_login_form">
+        <!-- 注册 -->
         <el-button type="danger" @click="submitForm('loginForm', 1)" class="reg-btn">注册</el-button>
+
+        <!-- 登录 -->
         <el-button
           type="primary"
           @click="submitForm('loginForm', 2)"
@@ -87,11 +91,11 @@ export default {
     TodoList
   },
   data() {
-    var validateUserName = (rule, value, callback) => {
+    var validateUsername = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入账号"));
       } else {
-        if (this.loginForm.userName !== "") {
+        if (this.loginForm.username !== "") {
           // this.$refs.loginForm.validateField('userName');
         }
         callback();
@@ -108,14 +112,15 @@ export default {
       }
     };
     return {
+      tableData: [],
       loginForm: {
-        userName: "",
+        username: "",
         password: ""
       },
       rules: {
-        userName: [
+        username: [
           {
-            validator: validateUserName,
+            validator: validateUsername,
             trigger: "blur"
           }
         ],
@@ -131,56 +136,71 @@ export default {
     };
   },
   methods: {
+    // 控制是否显示登录注册模块
     showLogin() {
       this.status = !this.status;
+    },
+    submitForm(formName, type) {
+      // let that = this;
+      if (type === 1) {
+        this.axios
+          .post("/api/v3/register", {
+            username: this.loginForm.username,
+            password: this.loginForm.password
+          })
+          .then(response => {
+            if (response.data.code === 200) {
+              this.$message({
+                showClose: true,
+                duration: 1500,
+                message: "注册成功",
+                type: "success"
+              });
+            } else {
+              this.$message({
+                showClose: true,
+                duration: 1500,
+                message: "注册失败",
+                type: "warning"
+              });
+            }
+          });
+      }
+      if (type === 2) {
+        this.axios
+          .post("/api/v3/login", {
+            username: this.loginForm.username,
+            password: this.loginForm.password
+          })
+          .then(response => {
+            this.tableData = response.data;
+            if (this.tableData.data === 50001) {
+              this.$message({
+                showClose: true,
+                duration: 1500,
+                message: "用户未注册,请先注册",
+                type: "warning"
+              });
+            }
+            if (this.tableData.data === 200) {
+              this.$message({
+                showClose: true,
+                duration: 1500,
+                message: "登录成功",
+                type: "success"
+              });
+              this.status = !this.status;
+            } else {
+              this.$message({
+                showClose: true,
+                duration: 1500,
+                message: "登录失败",
+                type: "warning"
+              });
+            }
+          });
+      }
     }
-    // submitForm(formName, type) {
-    //   let that = this;
-    //   this.$refs[formName].validate(valid => {
-    //     if (valid) {
-    //       // eslint-disable-next-line no-console
-    //       console.log(this.loginForm.userName);
-    //       // eslint-disable-next-line no-console
-    //       console.log(this.loginForm.password);
-    //       if (type === 1) {
-    //         post_register(that.loginForm).then(res => {
-    //           if (res.data.status === 1000) {
-    //             this.$message({
-    //               message: res.data.message,
-    //               type: "success"
-    //             });
-    //           } else {
-    //             this.$message({
-    //               message: res.data.message,
-    //               type: "warning"
-    //             });
-    //           }
-    //         });
-    //       } else {
-    //         post_login(that.loginForm).then(res => {
-    //           if (res.data.status === 1000) {
-    //             this.$message({
-    //               message: res.data.message,
-    //               type: "success"
-    //             });
-    //             this.$store.dispatch("setUser", this.loginForm.userName);
-    //             this.$router.push("/list");
-    //           } else {
-    //             this.$message({
-    //               message: res.data.message,
-    //               type: "warning"
-    //             });
-    //             this.$store.dispatch("setUser", null);
-    //           }
-    //         });
-    //       }
-    //     } else {
-    //       // eslint-disable-next-line no-console
-    //       console.log("error submit!!");
-    //       return false;
-    //     }
-    //   });
-    // }
   }
 };
 </script>
@@ -222,7 +242,7 @@ export default {
   font-size: 18px;
 }
 .el-button.myHome_btn.el-button--primary {
-  background: #ee3f4d90;
+  background: #f3f3f399;
   padding: 1;
   float: left;
 }
