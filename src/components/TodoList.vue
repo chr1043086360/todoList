@@ -5,7 +5,7 @@
     <el-row :gutter="15">
       <!-- span:栅格占的列数, offset:栅格左侧间隔数 -->
       <el-col :span="16" :offset="2">
-        <el-input v-model="newTitle" size placeholder="请输入待办事项..." />
+        <el-input v-model="newTitle" size placeholder="请输入待办事项" />
       </el-col>
       <el-col :span="6">
         <el-button class="addButton" type="primary" icon="el-icon-plus" @click="handleAdd" circle></el-button>
@@ -129,12 +129,7 @@ export default {
 </script>
 
 <style>
-/* .addButton {
-  padding: 0 auto;
-} */
-/* .el-col el-col-6{
-  padding: 0 auto;
-} */
+
 .el-table .warning-row {
   background: oldlace;
 }
