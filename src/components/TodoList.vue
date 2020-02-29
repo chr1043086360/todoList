@@ -2,7 +2,7 @@
 <template>
   <el-card class="box-card">
     <!-- gutter:栅格间隔 -->
-    <el-row :gutter="30">
+    <el-row :gutter="15">
       <!-- span:栅格占的列数, offset:栅格左侧间隔数 -->
       <el-col :span="16" :offset="2">
         <el-input v-model="newTitle" size placeholder="请输入待办事项..." />
@@ -22,14 +22,15 @@
           <el-button
             type="success"
             icon="el-icon-check"
-            v-show="scope.row.Status"
+            v-show="!scope.row.Status"
             @click="handleEdit(scope.$index, scope.row)"
             circle
           ></el-button>
           <el-button
             type="warning"
-            icon="el-icon-refresh-left"
-            v-show="!scope.row.Status"
+                      
+            icon="el-icon-finished"
+            v-show="scope.row.Status"
             @click="handleEdit(scope.$index, scope.row)"
             circle
           ></el-button>
@@ -83,7 +84,7 @@ export default {
           this.$message({
             showClose: true,
             duration: 1500,
-            message: `<${row.Title}> ${messageSuffix}`,
+            message: `☆${row.Title}☆   ${messageSuffix}`,
             type: "success"
           });
         });
@@ -119,7 +120,7 @@ export default {
         this.$message({
           showClose: true,
           duration: 1500,
-          message: "title不能为空哦",
+          message: "Title不能为空哦",
           type: "warning"
         });
       }

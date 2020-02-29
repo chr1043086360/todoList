@@ -33,16 +33,22 @@ export default {
 };
 </script>
 <style>
+/* .myHome{
+  display: flex;
+  float: left;
+  margin-left: 0px;
+} */
 .el-header {
+  /* clear: left; */
   background-color: #409eff;
   color: #fff;
   text-align: center;
   line-height: 60px;
   /* word-spacing: 0.1px; */
   /* letter-spacing: 1px; */
-  font-weight: 900;
+  font-weight: 500;
   font-style: italic;
-  font-size: 30px
+  font-size: 28px;
 }
 .el-footer {
   background-color: #909399;
@@ -59,6 +65,7 @@ export default {
   color: #ee3f4d;
   margin: 0 4px;
   font-weight: 900;
+  font-size: 23px;
 }
 .el-footer a:hover {
   /* color: rebeccapurple; */
