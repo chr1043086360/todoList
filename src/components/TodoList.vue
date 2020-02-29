@@ -2,7 +2,7 @@
 <template>
   <el-card class="box-card">
     <!-- gutter:栅格间隔 -->
-    <el-row :gutter="15">
+    <el-row :gutter="20">
       <!-- span:栅格占的列数, offset:栅格左侧间隔数 -->
       <el-col :span="16" :offset="2">
         <el-input v-model="newTitle" size placeholder="请输入待办事项" />
