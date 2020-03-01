@@ -10,7 +10,7 @@
 "
         circle
       ></el-button>
-      <el-button class="log_out" @click="logOut" type="primary" icon="el-icon-switch-button">EXIT</el-button>
+      <el-button class="log_out" @click="logout" type="primary" icon="el-icon-switch-button">EXIT</el-button>
 
       <div class="myPlans">My Plans</div>
     </el-header>
@@ -208,7 +208,7 @@ export default {
       }
     },
     // 退出登录接口
-    logOut() {
+    logout() {
       this.axios.get("/api/v3/logout").then(response => {
         if (response.data.data === 403) {
           this.$message({
@@ -237,8 +237,9 @@ export default {
   margin-left: 10px;
 }
 .el-button.log_out.el-button--primary {
-  margin-right: 5px;
-  margin-top: 10px;
+  margin-right: 12px;
+  margin-top: 14px;
+  padding: 7px;
 }
 .el-button.log_out.el-button--primary span {
   font-size: 18px;
