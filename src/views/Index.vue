@@ -85,6 +85,7 @@
 // @ is an alias to /src
 import TodoList from "@/components/TodoList.vue";
 // import { post_login, post_register } from '@/server/api/server';
+import router from '../router/index';
 export default {
   name: "Index",
   components: {
@@ -144,6 +145,7 @@ export default {
       // let that = this;
       if (type === 1) {
         this.axios
+          // 注册接口
           .post("/api/v3/register", {
             username: this.loginForm.username,
             password: this.loginForm.password
@@ -166,6 +168,7 @@ export default {
             }
           });
       }
+      // 登录接口
       if (type === 2) {
         this.axios
           .post("/api/v3/login", {
@@ -196,6 +199,7 @@ export default {
                 type: "success"
               });
               this.status = !this.status;
+              router.go(0)
             }
           });
       }

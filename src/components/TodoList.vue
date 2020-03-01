@@ -99,20 +99,31 @@ export default {
         });
       });
     },
+    // 创建文章接口
     handleAdd() {
       if (this.newTitle != "") {
         this.axios
           .post("/api/v3/todo", {
             title: this.newTitle
           })
-          .then(() => {
-            this.getTodoList();
-            this.$message({
-              showClose: true,
-              duration: 1500,
-              message: "添加待办事项成功",
-              type: "success"
-            });
+          .then(response2 => {
+            // alert(response2.data.msg)
+            if (response2.data.data === 403) {
+              this.$message({
+                showClose: true,
+                duration: 2000,
+                message: "主人请先登录再创建列表哦",
+                type: "warning"
+              });
+            } else {
+              this.getTodoList();
+              this.$message({
+                showClose: true,
+                duration: 1500,
+                message: "添加待办事项成功",
+                type: "success"
+              });
+            }
           });
         this.newTitle = "";
       } else {
@@ -129,7 +140,6 @@ export default {
 </script>
 
 <style>
-
 .el-table .warning-row {
   background: oldlace;
 }
