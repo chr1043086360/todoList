@@ -199,7 +199,7 @@ export default {
                 type: "success"
               });
               this.status = !this.status;
-              router.go(0)
+              // router.go(0)
             }
           });
       }
