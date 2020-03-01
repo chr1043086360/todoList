@@ -10,6 +10,8 @@
 "
         circle
       ></el-button>
+      <el-button class="log_out" @click="logOut" type="primary" icon="el-icon-switch-button">EXIT</el-button>
+
       <div class="myPlans">My Plans</div>
     </el-header>
     <!-- {{tableData}} -->
@@ -85,7 +87,7 @@
 // @ is an alias to /src
 import TodoList from "@/components/TodoList.vue";
 // import { post_login, post_register } from '@/server/api/server';
-import router from '../router/index';
+import router from "../router/index";
 export default {
   name: "Index",
   components: {
@@ -161,9 +163,9 @@ export default {
             } else {
               this.$message({
                 showClose: true,
-                duration: 1500,
-                message: "注册失败",
-                type: "warning"
+                duration: 2000,
+                message: "该用户名已经有人注册!",
+                type: "error"
               });
             }
           });
@@ -180,29 +182,51 @@ export default {
             if (this.tableData.data === 50001) {
               this.$message({
                 showClose: true,
-                duration: 1500,
-                message: "用户未注册,请先注册",
+                duration: 2000,
+                message: "用户未注册,请先注册!",
                 type: "warning"
               });
             } else if (this.tableData.data === 40001) {
               this.$message({
                 showClose: true,
-                duration: 1500,
-                message: "请输入正确的用户名或密码",
-                type: "warning"
+                duration: 2000,
+                message: "请输入正确的用户名或密码!",
+                type: "error"
               });
             } else {
+              // this.status = !this.status;
+              // 刷新界面
+              router.go(0);
               this.$message({
                 showClose: true,
-                duration: 1500,
-                message: "登录成功",
+                duration: 2500,
+                message: "主人,欢迎回家!",
                 type: "success"
               });
-              this.status = !this.status;
-              router.go(0)
             }
           });
       }
+    },
+    // 退出登录接口
+    logOut() {
+      this.axios.get("/api/v3/logout").then(response => {
+        if (response.data.data === 403) {
+          this.$message({
+            showClose: true,
+            duration: 1500,
+            message: "您还没有登录哦,主人!",
+            type: "warning"
+          });
+        } else if (response.data.data === 200) {
+          router.go(0);
+          this.$message({
+            showClose: true,
+            duration: 2500,
+            message: "欢迎下次光临!",
+            type: "success"
+          });
+        }
+      });
     }
   }
 };
@@ -212,6 +236,17 @@ export default {
   margin-top: 10px;
   margin-left: 10px;
 }
+.el-button.log_out.el-button--primary {
+  margin-right: 5px;
+  margin-top: 10px;
+}
+.el-button.log_out.el-button--primary span {
+  font-size: 18px;
+}
+
+.el-icon-switch-button {
+  font-size: 18px;
+}
 .myHome_btn {
   /* position: fixed; */
   /* top: 10px; */
@@ -219,6 +254,9 @@ export default {
   float: left;
   /* margin-left: 0px;
   font-size: 30px; */
+}
+.log_out {
+  float: right;
 }
 .btn_login_form {
   text-align: center;
@@ -238,7 +276,7 @@ export default {
 .myPlans {
   text-align: center;
   /* position: absolute; */
-  width: 200px;
+  width: 160px;
   margin: 0 auto;
 }
 .el-button.myHome_btn.el-button--primary span {
