@@ -196,14 +196,15 @@ export default {
             } else {
               // this.status = !this.status;
               // 刷新界面
-              router.go(0);
-              setTimeout(this.$message({
+
+              this.$message({
                 showClose: true,
-                duration: 2500,
+                duration: 2000,
                 message: "主人,欢迎回家!",
                 type: "success"
-              }), 1000)
-              
+              });
+
+              setTimeout(router.go(0), 2000);
             }
           });
       }
@@ -219,14 +220,13 @@ export default {
             type: "warning"
           });
         } else if (response.data.data === 200) {
-          router.go(0);
-          setTimeout(this.$message({
+          this.$message({
             showClose: true,
-            duration: 2500,
+            duration: 2000,
             message: "欢迎下次光临!",
             type: "success"
-          }), 1000)
-          
+          });
+          setTimeout(router.go(0), 2000);
         }
       });
     }
