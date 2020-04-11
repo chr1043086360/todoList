@@ -12,7 +12,9 @@
       ></el-button>
       <el-button class="log_out" @click="logout" type="primary" icon="el-icon-switch-button">EXIT</el-button>
 
-      <div class="myPlans">My Plans</div>
+      <div class="myPlans">
+        <a href="http://122.51.107.26:5555">My Plans</a>
+      </div>
     </el-header>
     <!-- {{tableData}} -->
     <!-- <el-button class="myHome_btn" type="primary" icon="el-icon-edit" circle></el-button> -->
@@ -197,6 +199,8 @@ export default {
               // this.status = !this.status;
               // 刷新界面
               router.go(0);
+              // this.axios.get("/api/v3/todo");
+              // setTimeout()
               this.$message({
                 showClose: true,
                 duration: 2500,
@@ -274,11 +278,15 @@ export default {
 .fuck {
   margin-top: 20px;
 }
-.myPlans {
+.myPlans a {
+  display: block;
+  text-decoration: none;
+  color: hsl(356, 81%, 59%);
   text-align: center;
   /* position: absolute; */
   width: 160px;
   margin: 0 auto;
+  font-weight: 600;
 }
 .el-button.myHome_btn.el-button--primary span {
   font-size: 18px;
