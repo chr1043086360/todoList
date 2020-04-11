@@ -196,17 +196,18 @@ export default {
                 type: "error"
               });
             } else {
-              // this.status = !this.status;
+              this.status = !this.status;
               // 刷新界面
               router.go(0);
-              // this.axios.get("/api/v3/todo");
-              // setTimeout()
-              this.$message({
-                showClose: true,
-                duration: 2500,
-                message: "主人,欢迎回家!",
-                type: "success"
-              });
+
+              // this.$message({
+              //   showClose: true,
+              //   duration: 2000,
+              //   message: "主人,欢迎回家!",
+              //   type: "success"
+              // });
+
+              // this.$forceUpdate();
             }
           });
       }
@@ -223,12 +224,12 @@ export default {
           });
         } else if (response.data.data === 200) {
           router.go(0);
-          this.$message({
-            showClose: true,
-            duration: 2500,
-            message: "欢迎下次光临!",
-            type: "success"
-          });
+          // this.$message({
+          //   showClose: true,
+          //   duration: 2000,
+          //   message: "欢迎下次光临!",
+          //   type: "success"
+          // });
         }
       });
     }
