@@ -1,6 +1,4 @@
-# bubble-frontend
-
-This project is the frontend code base vue2.0 for [bubble](https://github.com/Q1mi/bubble).
+# todoList前端工程项目
 
 ## Project setup
 ```
